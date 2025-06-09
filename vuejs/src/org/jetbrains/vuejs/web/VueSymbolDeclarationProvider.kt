@@ -4,7 +4,7 @@ package org.jetbrains.vuejs.web
 import com.intellij.lang.javascript.psi.*
 import com.intellij.openapi.util.TextRange
 import com.intellij.polySymbols.PolySymbol
-import com.intellij.polySymbols.PolySymbol.Companion.JS_EVENTS
+import com.intellij.polySymbols.js.JS_EVENTS
 import com.intellij.polySymbols.PolySymbolQualifiedName
 import com.intellij.polySymbols.declarations.PolySymbolDeclaration
 import com.intellij.polySymbols.declarations.PolySymbolDeclarationProvider
@@ -50,7 +50,7 @@ class VueSymbolDeclarationProvider : PolySymbolDeclarationProvider {
         }
           ?.let { VueModelManager.findEnclosingComponent(it) }
           ?.asPolySymbol("", VueModelVisitor.Proximity.LOCAL)
-          ?.getMatchingSymbols(PolySymbolQualifiedName(JS_EVENTS, name),
+          ?.getMatchingSymbols(JS_EVENTS.withName(name),
                                PolySymbolsNameMatchQueryParams.create(PolySymbolsQueryExecutorFactory.create(parent, false)),
                                Stack())
           ?.getOrNull(0)

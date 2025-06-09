@@ -9,6 +9,9 @@ import com.intellij.lang.javascript.psi.ecma6.TypeScriptClass
 import com.intellij.lang.javascript.psi.ecma6.TypeScriptField
 import com.intellij.model.Pointer
 import com.intellij.openapi.project.Project
+import com.intellij.polySymbols.html.HTML_ATTRIBUTES
+import com.intellij.polySymbols.js.JS_STRING_LITERALS
+import com.intellij.polySymbols.js.JS_PROPERTIES
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiWhiteSpace
 import com.intellij.psi.css.CssElement
@@ -20,9 +23,8 @@ import com.intellij.psi.xml.XmlAttributeValue
 import com.intellij.psi.xml.XmlElement
 import com.intellij.psi.xml.XmlTag
 import com.intellij.util.asSafely
-import com.intellij.polySymbols.PolySymbol
-import com.intellij.polySymbols.PolySymbol.Companion.NAMESPACE_HTML
-import com.intellij.polySymbols.PolySymbol.Companion.NAMESPACE_JS
+import com.intellij.polySymbols.html.NAMESPACE_HTML
+import com.intellij.polySymbols.js.NAMESPACE_JS
 import com.intellij.polySymbols.PolySymbolQualifiedKind
 import com.intellij.polySymbols.PolySymbolsScope
 import com.intellij.polySymbols.context.PolyContext
@@ -212,7 +214,7 @@ class Angular2PolySymbolsQueryConfigurator : PolySymbolsQueryConfigurator {
               ?.takeIf { Angular2DecoratorUtil.isAngularEntityDecorator(it, true, COMPONENT_DEC, DIRECTIVE_DEC) }
               ?.also { decorator = it } != null
         )
-          listOf(HostBindingsScope(mapOf(PolySymbol.JS_PROPERTIES to PolySymbol.HTML_ATTRIBUTES), decorator!!))
+          listOf(HostBindingsScope(mapOf(JS_PROPERTIES to HTML_ATTRIBUTES), decorator!!))
         else
           listOfNotNull(getCssClassesInJSLiteralInHtmlAttributeScope(element))
       }
@@ -234,7 +236,7 @@ class Angular2PolySymbolsQueryConfigurator : PolySymbolsQueryConfigurator {
     return element
       .parentOfType<TypeScriptClass>()
       ?.let { Angular2DecoratorUtil.findDecorator(it, true, COMPONENT_DEC, DIRECTIVE_DEC) }
-      ?.let { HostBindingsScope(mapOf(PolySymbol.JS_STRING_LITERALS to mapping), it) }
+      ?.let { HostBindingsScope(mapOf(JS_STRING_LITERALS to mapping), it) }
   }
 
   private fun getViewChildrenScopeForLiteral(element: JSLiteralExpression): PolySymbolsScope? {
@@ -303,24 +305,24 @@ const val ELEMENT_NG_CONTAINER: String = "ng-container"
 const val ELEMENT_NG_CONTENT: String = "ng-content"
 const val ELEMENT_NG_TEMPLATE: String = "ng-template"
 
-val NG_PROPERTY_BINDINGS: PolySymbolQualifiedKind = PolySymbolQualifiedKind(NAMESPACE_HTML, "ng-property-bindings")
-val NG_EVENT_BINDINGS: PolySymbolQualifiedKind = PolySymbolQualifiedKind(NAMESPACE_HTML, "ng-event-bindings")
-val NG_STRUCTURAL_DIRECTIVES: PolySymbolQualifiedKind = PolySymbolQualifiedKind(NAMESPACE_JS, "ng-structural-directives")
-val NG_DIRECTIVE_ONE_TIME_BINDINGS: PolySymbolQualifiedKind = PolySymbolQualifiedKind(NAMESPACE_JS, "ng-one-time-bindings")
-val NG_DIRECTIVE_INPUTS: PolySymbolQualifiedKind = PolySymbolQualifiedKind(NAMESPACE_JS, "ng-directive-inputs")
-val NG_DIRECTIVE_OUTPUTS: PolySymbolQualifiedKind = PolySymbolQualifiedKind(NAMESPACE_JS, "ng-directive-outputs")
-val NG_DIRECTIVE_IN_OUTS: PolySymbolQualifiedKind = PolySymbolQualifiedKind(NAMESPACE_JS, "ng-directive-in-outs")
-val NG_DIRECTIVE_ATTRIBUTES: PolySymbolQualifiedKind = PolySymbolQualifiedKind(NAMESPACE_JS, "ng-directive-attributes")
-val NG_DIRECTIVE_EXPORTS_AS: PolySymbolQualifiedKind = PolySymbolQualifiedKind(NAMESPACE_JS, "ng-directive-exports-as")
-val NG_DIRECTIVE_ELEMENT_SELECTORS: PolySymbolQualifiedKind = PolySymbolQualifiedKind(NAMESPACE_JS, "ng-directive-element-selectors")
-val NG_DIRECTIVE_ATTRIBUTE_SELECTORS: PolySymbolQualifiedKind = PolySymbolQualifiedKind(NAMESPACE_JS, "ng-directive-attribute-selectors")
-val NG_I18N_ATTRIBUTES: PolySymbolQualifiedKind = PolySymbolQualifiedKind(NAMESPACE_HTML, "ng-i18n-attributes")
-val NG_BLOCKS: PolySymbolQualifiedKind = PolySymbolQualifiedKind(NAMESPACE_HTML, "ng-blocks")
-val NG_BLOCK_PARAMETERS: PolySymbolQualifiedKind = PolySymbolQualifiedKind(NAMESPACE_HTML, "ng-block-parameters")
-val NG_BLOCK_PARAMETER_PREFIXES: PolySymbolQualifiedKind = PolySymbolQualifiedKind(NAMESPACE_HTML, "ng-block-parameter-prefixes")
-val NG_DEFER_ON_TRIGGERS: PolySymbolQualifiedKind = PolySymbolQualifiedKind(NAMESPACE_JS, "ng-defer-on-triggers")
-val NG_TEMPLATE_BINDING_KEYWORDS: PolySymbolQualifiedKind = PolySymbolQualifiedKind(NAMESPACE_JS, "ng-template-binding-keywords")
-val NG_TEMPLATE_BINDINGS: PolySymbolQualifiedKind = PolySymbolQualifiedKind(NAMESPACE_JS, "ng-template-bindings")
+val NG_PROPERTY_BINDINGS: PolySymbolQualifiedKind = PolySymbolQualifiedKind[NAMESPACE_HTML, "ng-property-bindings"]
+val NG_EVENT_BINDINGS: PolySymbolQualifiedKind = PolySymbolQualifiedKind[NAMESPACE_HTML, "ng-event-bindings"]
+val NG_STRUCTURAL_DIRECTIVES: PolySymbolQualifiedKind = PolySymbolQualifiedKind[NAMESPACE_JS, "ng-structural-directives"]
+val NG_DIRECTIVE_ONE_TIME_BINDINGS: PolySymbolQualifiedKind = PolySymbolQualifiedKind[NAMESPACE_JS, "ng-one-time-bindings"]
+val NG_DIRECTIVE_INPUTS: PolySymbolQualifiedKind = PolySymbolQualifiedKind[NAMESPACE_JS, "ng-directive-inputs"]
+val NG_DIRECTIVE_OUTPUTS: PolySymbolQualifiedKind = PolySymbolQualifiedKind[NAMESPACE_JS, "ng-directive-outputs"]
+val NG_DIRECTIVE_IN_OUTS: PolySymbolQualifiedKind = PolySymbolQualifiedKind[NAMESPACE_JS, "ng-directive-in-outs"]
+val NG_DIRECTIVE_ATTRIBUTES: PolySymbolQualifiedKind = PolySymbolQualifiedKind[NAMESPACE_JS, "ng-directive-attributes"]
+val NG_DIRECTIVE_EXPORTS_AS: PolySymbolQualifiedKind = PolySymbolQualifiedKind[NAMESPACE_JS, "ng-directive-exports-as"]
+val NG_DIRECTIVE_ELEMENT_SELECTORS: PolySymbolQualifiedKind = PolySymbolQualifiedKind[NAMESPACE_JS, "ng-directive-element-selectors"]
+val NG_DIRECTIVE_ATTRIBUTE_SELECTORS: PolySymbolQualifiedKind = PolySymbolQualifiedKind[NAMESPACE_JS, "ng-directive-attribute-selectors"]
+val NG_I18N_ATTRIBUTES: PolySymbolQualifiedKind = PolySymbolQualifiedKind[NAMESPACE_HTML, "ng-i18n-attributes"]
+val NG_BLOCKS: PolySymbolQualifiedKind = PolySymbolQualifiedKind[NAMESPACE_HTML, "ng-blocks"]
+val NG_BLOCK_PARAMETERS: PolySymbolQualifiedKind = PolySymbolQualifiedKind[NAMESPACE_HTML, "ng-block-parameters"]
+val NG_BLOCK_PARAMETER_PREFIXES: PolySymbolQualifiedKind = PolySymbolQualifiedKind[NAMESPACE_HTML, "ng-block-parameter-prefixes"]
+val NG_DEFER_ON_TRIGGERS: PolySymbolQualifiedKind = PolySymbolQualifiedKind[NAMESPACE_JS, "ng-defer-on-triggers"]
+val NG_TEMPLATE_BINDING_KEYWORDS: PolySymbolQualifiedKind = PolySymbolQualifiedKind[NAMESPACE_JS, "ng-template-binding-keywords"]
+val NG_TEMPLATE_BINDINGS: PolySymbolQualifiedKind = PolySymbolQualifiedKind[NAMESPACE_JS, "ng-template-bindings"]
 
 fun isNgClassLiteralContext(literal: PsiElement): Boolean =
   isJSLiteralContextFromEmbeddedContent(literal, Angular2Binding::class.java, ::isNgClassAttribute)
