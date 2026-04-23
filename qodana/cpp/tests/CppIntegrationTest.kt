@@ -9,7 +9,7 @@ import com.intellij.ide.starter.models.IdeInfo
 import com.intellij.ide.starter.models.TestCase
 import com.intellij.ide.starter.project.LocalProjectInfo
 import com.intellij.openapi.application.PathManager
-import com.intellij.tools.ide.starter.build.server.clion.CLion
+import com.intellij.tools.ide.starter.product.clion.CLion
 import utilities.qodana.IntegrationTest
 import java.nio.file.Path
 import kotlin.io.path.div

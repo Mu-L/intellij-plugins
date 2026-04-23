@@ -7,7 +7,7 @@ import com.intellij.ide.starter.models.TestCase
 import com.intellij.ide.starter.project.LocalProjectInfo
 import com.intellij.openapi.application.PathManager
 import com.intellij.rustrover.integration.testFramework.createRustRoverTestContext
-import com.intellij.tools.ide.starter.build.server.rustrover.RustRover
+import com.intellij.tools.ide.starter.product.rustrover.RustRover
 import org.junit.jupiter.api.Timeout
 import utilities.qodana.QodanaAnalysisResult
 import utilities.qodana.QodanaRunConfig
