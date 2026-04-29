@@ -57,7 +57,7 @@ public final class CfmlFile extends PsiFileBase {
           if (nameAndType == null) {
             return;
           }
-          CfmlImplicitVariable var = result.computeIfAbsent(nameAndType[0], __ -> {
+          CfmlImplicitVariable var = result.computeIfAbsent(nameAndType[0], _ -> {
             return new CfmlImplicitVariable(CfmlFile.this, comment, nameAndType[0]);
           });
           var.setType(nameAndType[1]);

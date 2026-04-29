@@ -222,7 +222,7 @@ public class MxmlJSClass extends XmlBackedJSClassImpl {
   @Override
   public boolean processOuterDeclarations(PsiScopeProcessor processor) {
     XmlFile file = (XmlFile)getContainingFile();
-    ImplicitJSFieldImpl field = CachedValuesManager.getProjectPsiDependentCache(file, __ -> {
+    ImplicitJSFieldImpl field = CachedValuesManager.getProjectPsiDependentCache(file, _ -> {
       JSClass cls = XmlBackedJSClassFactory.getXmlBackedClass(file);
       return new ImplicitJSFieldImpl("outerDocument", cls.getQualifiedName(), JSAttributeList.AccessType.PRIVATE, file);
     });

@@ -81,7 +81,7 @@ public class ActionScriptImportProcessor implements RequiredImportProcessor {
     if (expression == null) {
       return ContainerUtil.emptyList();
     }
-    JSChangeSignatureProcessor.processUnresolvedReferencesForElement(expression, context, (__, resolveResults) -> {
+    JSChangeSignatureProcessor.processUnresolvedReferencesForElement(expression, context, (_, resolveResults) -> {
       if (resolveResults.length != 1) {
         return;
       }

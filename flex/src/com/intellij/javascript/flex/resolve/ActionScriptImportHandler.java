@@ -201,7 +201,7 @@ public class ActionScriptImportHandler extends JSImportHandler {
   }
 
   private static @Nullable JSImportedElementResolveResult resolveTypeNameUsingImports(final @NotNull String referencedName, PsiNamedElement parent) {
-    Map<String, JSImportedElementResolveResult> map = CachedValuesManager.getProjectPsiDependentCache(parent, __ -> new ConcurrentHashMap<>());
+    Map<String, JSImportedElementResolveResult> map = CachedValuesManager.getProjectPsiDependentCache(parent, _ -> new ConcurrentHashMap<>());
     JSImportedElementResolveResult result = map.get(referencedName);
 
     if (result == null) {

@@ -67,7 +67,7 @@ public final class DartServerImplementationsMarkerProvider implements LineMarker
     final VirtualFile file = name.getContainingFile().getVirtualFile();
     PsiElement anchor = PsiTreeUtil.getDeepestFirst(name);
     return new LineMarkerInfo<>(anchor, anchor.getTextRange(), AllIcons.Gutter.OverridenMethod,
-                                element -> DaemonBundle.message("class.is.subclassed.too.many"), (e, __) -> {
+                                element -> DaemonBundle.message("class.is.subclassed.too.many"), (e, _) -> {
       DartAnalysisServerService das = DartAnalysisServerService.getInstance(name.getProject());
       final List<TypeHierarchyItem> items = das.search_getTypeHierarchy(file, anchor.getTextRange().getStartOffset(), false);
       if (items.isEmpty()) {
@@ -87,7 +87,7 @@ public final class DartServerImplementationsMarkerProvider implements LineMarker
     final VirtualFile file = name.getContainingFile().getVirtualFile();
     PsiElement anchor = PsiTreeUtil.getDeepestFirst(name);
     return new LineMarkerInfo<>(anchor, anchor.getTextRange(), AllIcons.Gutter.OverridenMethod,
-                                element -> DaemonBundle.message("method.is.overridden.too.many"), (e, __) -> {
+                                element -> DaemonBundle.message("method.is.overridden.too.many"), (e, _) -> {
       DartAnalysisServerService das = DartAnalysisServerService.getInstance(name.getProject());
       final List<TypeHierarchyItem> items = das.search_getTypeHierarchy(file, anchor.getTextRange().getStartOffset(), false);
       if (items.isEmpty()) {

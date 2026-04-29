@@ -115,7 +115,7 @@ public class PerforceNumberNameSynchronizer implements PersistentStateComponent<
   }
 
   private PerforceNumberNameMap ensureMapping(ConnectionKey key) {
-    return myMap.computeIfAbsent(key, __ -> new PerforceNumberNameMap());
+    return myMap.computeIfAbsent(key, _ -> new PerforceNumberNameMap());
   }
 
   /** @return the set of change lists not present anymore in p4, that have to be removed from IDEA */
